@@ -1,24 +1,63 @@
-# README
+# Time to Answer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicação web em Ruby on Rails com página inicial de boas-vindas (`Welcome#index`). O projeto foi atualizado para uma stack suportada, eliminando dependências com vulnerabilidades conhecidas (CVEs).
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+| Componente | Versão |
+|---|---|
+| Ruby | 3.4.9 |
+| Rails | 8.0.x |
+| Banco de dados | SQLite3 |
+| Servidor | Puma |
+| Assets | Propshaft + Importmap (Turbo / Stimulus) |
 
-* System dependencies
+## Requisitos
 
-* Configuration
+- Ruby 3.4.9 (ou compatível com a versão em `.ruby-version`)
+- Bundler
+- SQLite3
 
-* Database creation
+No Windows, com RubyInstaller em `C:\Ruby34-x64`, garanta que `C:\Ruby34-x64\bin` esteja no `PATH`.
 
-* Database initialization
+## Setup
 
-* How to run the test suite
+```bash
+bundle install
+bin/rails db:prepare
+bin/rails server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Acesse [http://localhost:3000](http://localhost:3000) (rota raiz) ou `/welcome/index`.
 
-* Deployment instructions
+Alternativa com o script de setup (instala gems, prepara o banco e sobe o servidor):
 
-* ...
+```bash
+bin/setup
+```
+
+## Testes
+
+```bash
+bin/rails test
+```
+
+## Segurança
+
+As dependências Ruby foram atualizadas de Rails 5.2 / Ruby 2.6 (EOL) para Rails 8 / Ruby 3.4. A auditoria de gems não reporta vulnerabilidades conhecidas:
+
+```bash
+bundle exec bundle-audit check --update
+```
+
+Em desenvolvimento e teste, o Rails gera automaticamente a `secret_key_base` local. Em produção, defina `SECRET_KEY_BASE` no ambiente ou gere credenciais com:
+
+```bash
+bin/rails credentials:edit
+```
+
+## Estrutura relevante
+
+- `app/controllers/welcome_controller.rb` — página inicial
+- `config/routes.rb` — `root` aponta para `welcome#index`
+- `Gemfile` / `Gemfile.lock` — dependências e versões travadas

@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class WelcomeControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
@@ -6,4 +6,8 @@ class WelcomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get root" do
+    get root_url
+    assert_response :success
+  end
 end
