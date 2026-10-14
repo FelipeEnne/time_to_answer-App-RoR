@@ -7,7 +7,7 @@ Aplicação web em Ruby on Rails com página inicial de boas-vindas (`Welcome#in
 | Componente | Versão |
 |---|---|
 | Ruby | 3.4.9 |
-| Rails | 8.0.x |
+| Rails | 8.1.x |
 | Banco de dados | SQLite3 |
 | Servidor | Puma |
 | Assets | Propshaft + Importmap (Turbo / Stimulus) |
@@ -49,6 +49,8 @@ As dependências Ruby foram atualizadas de Rails 5.2 / Ruby 2.6 (EOL) para Rails
 ```bash
 bundle exec bundle-audit check --update
 ```
+
+Em produção, configure `ALLOWED_HOSTS` com os nomes DNS aceitos pela aplicação, separados por vírgula (por exemplo, `app.example.com,www.example.com`). A aplicação falha ao iniciar se a variável estiver ausente ou vazia, para não aceitar qualquer cabeçalho `Host`. A política CSP é aplicada globalmente e permite scripts inline apenas quando possuem nonce gerado por requisição.
 
 Em desenvolvimento e teste, o Rails gera automaticamente a `secret_key_base` local. Em produção, defina `SECRET_KEY_BASE` no ambiente ou gere credenciais com:
 
